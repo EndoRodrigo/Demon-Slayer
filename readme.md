@@ -27,7 +27,7 @@ También vas a necesitar un servidor ASGI para producción cómo Uvicorn o Hyper
 <div class="termy">
 
 ```console
-$ pip install "uvicorn[standard]"
+$ pip install uvicorn
 
 ---> 100%
 ```
@@ -47,6 +47,15 @@ Para el manejo de dependencias usaremos entorno virtual y administrador de paque
 $ python -m venv env
 $ env\Scripts\activate  --> Windows
 $ source env/bin/activate  --> Linux
-$ pip install -r depencias.txt
+$ pip install -r dependencias.txt
 ---> 100%
 ```
+
+## Documentación interactiva de la API
+
+En el siguiente link puedes probar tus Api sin necesidad de depender de otra herramientas como Postman o SopaIU solo debes iniciar el servidor de uvicorn 
+
+```console
+uvicorn main:app --reload --port 5000
+http://127.0.0.1:5000/docs#/
+---
