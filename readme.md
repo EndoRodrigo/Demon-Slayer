@@ -31,3 +31,22 @@ $ pip install "uvicorn[standard]"
 
 ---> 100%
 ```
+
+## Clonar el repositorio
+
+Para colonar este proyecto se requiere tener instalado Git y ejecutar el siguiente comando en la ruta donde va a tarbajar con el proyecto
+```console
+$ git clone https://github.com/EndoRodrigo/Demon-Slayer.git
+
+---> 100%
+```
+## Dependencias
+
+Para el manejo de dependencias usaremos entorno virtual y administrador de paquete PIP
+```console
+$ python -m venv env
+$ env\Scripts\activate  --> Windows
+$ source env/bin/activate  --> Linux
+$ pip install -r depencias.txt
+---> 100%
+```
