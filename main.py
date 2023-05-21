@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from enum import Enum
-from typing import Union
+from typing import Union, Annotated
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -73,4 +73,12 @@ async def read_user_item(
 
 @app.post("/create/")
 def create_pilar(pilar: Pilar):
-    return pilar.dict()
+    pilares.append(pilar)
+    return pilares
+
+@app.get("/items/")
+async def read_items(q: Annotated[str | None, Query(max_length=50)] = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
