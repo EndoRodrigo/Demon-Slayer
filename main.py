@@ -1,14 +1,25 @@
 from fastapi import FastAPI
 from enum import Enum
 from typing import Union
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Pilar(BaseModel):
+    id: int 
+    name: str
+    skill: list
+    range: str | None = None
+    edad: int | None = None
+    altura: float | None = None
+    status: bool | None = None 
+
 
 pilares = [
     {
 		"id": 1,
 		"name": "Giyu Tomioka",
-		"habilidades": ["Aqua Sword", "Water Breathing"],
+		"skills": ["Aqua Sword", "Water Breathing"],
 		"range": "Novato",
         "edad": 23,
         "altura": 1.78,
@@ -17,7 +28,7 @@ pilares = [
     {
 		"id": 2,
 		"name": "Sakonji Urokodaki",
-		"habilidades": ["Aqua Sword", "Water Breathing"],
+		"skills": ["Aqua Sword", "Water Breathing"],
 		"range": "Pilar",
         "edad": 58,
         "altura": 1.68,
@@ -56,7 +67,10 @@ def get_pillar_by_rango(range: SelectRange):
 
 @app.get("/items/{item_id}")
 async def read_user_item(
-    item_id: str, needy: str, skip: int = 0, limit: Union[int, None] = None
-):
+    item_id: str, needy: str, skip: int = 0, limit: Union[int, None] = None):
     item = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
     return item
+
+@app.post("/create/")
+def create_pilar(pilar: Pilar):
+    return pilar.dict()
