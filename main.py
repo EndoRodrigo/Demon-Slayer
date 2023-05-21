@@ -1,34 +1,54 @@
 from fastapi import FastAPI
 from enum import Enum
-from typing import Union
 
 app = FastAPI()
 
+pilares = [
+    {
+		"id": 1,
+		"name": "Giyu Tomioka",
+		"habilidades": ["Aqua Sword", "Water Breathing"],
+		"range": "Novato",
+        "edad": 23,
+        "altura": 1.78,
+        "estado": True
+	},
+    {
+		"id": 2,
+		"name": "Sakonji Urokodaki",
+		"habilidades": ["Aqua Sword", "Water Breathing"],
+		"range": "Pilar",
+        "edad": 58,
+        "altura": 1.68,
+        "estado": False
+	}
+
+]
+
+class SelectRange(str, Enum):
+    pilar = "Pilar"
+    intermedio = "Intermedio"
+    novato = "Novato"
+
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World desde FastApi"}
+def get_pillares():
+    return pilares
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/pilar/{id}")
+def get_pilar(id: int):
+    for find_pilar in pilares:
+        if id == find_pilar.get('id'):
+            return find_pilar
+    return []
 
-@app.get("/users/me")
-async def read_user_me():
-    return {"user_id": "the current user"}
 
-class ModelName(str, Enum):
-    alexnet = "alexnet"
-    resnet = "resnet"
-    lenet = "lenet"
 
-@app.get("/models/{model_name}")
-async def get_model(model_name: ModelName):
-    if model_name is ModelName.alexnet:
-        return {"model_name": model_name, "message": "Deep Learning FTW!"}
+@app.get("/pilar/rango/{range}")
+def get_pillar_by_rango(range: SelectRange):
+    for find_pilar in pilares:
+        if range == find_pilar.get('range'):
+            return find_pilar
 
-    if model_name.value == "lenet":
-        return {"model_name": model_name, "message": "LeCNN all the images"}
-
-    return {"model_name": model_name, "message": "Have some residuals"}
+    return []
