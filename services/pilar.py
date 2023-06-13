@@ -26,13 +26,12 @@ def create_pilares(db: Session, user: PilarModel):
 def update_pilares(db: Session, pilar: PilarModel):
     find_pilar = db.query(PilarSchema).filter(PilarSchema.id == pilar.id).first()
 
-    if find_pilar:
-        find_pilar.name = pilar.name
-        find_pilar.range = pilar.range
-        find_pilar.edad = pilar.edad
-        find_pilar.altura = pilar.altura
-        find_pilar.status = pilar.status
-        db.commit()
-        return find_pilar
+    find_pilar.name = pilar.name
+    find_pilar.range = pilar.range
+    find_pilar.edad = pilar.edad
+    find_pilar.altura = pilar.altura
+    find_pilar.status = pilar.status
+    db.commit()
+    db.refresh(find_pilar)
+    return find_pilar
     
-    return []
