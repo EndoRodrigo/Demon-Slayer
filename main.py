@@ -1,7 +1,4 @@
-from fastapi import FastAPI, Query
-from enum import Enum
-from typing import Union, Annotated, List
-from pydantic import BaseModel
+from fastapi import FastAPI
 from routers.user import user_router
 from routers.pilar import pilar_router
 

@@ -26,3 +26,7 @@ def get_pillares(db: Session = Depends(get_db)) -> dict():
 @pilar_router.post("/CreatePilar", tags=['Pilares principales'], response_model=dict())
 def create_pilar(pilar: Pilar, db: Session = Depends(get_db)) -> dict():
     return create_pilares(db, pilar)
+
+@pilar_router.put("updatepilar", tags=['Pilares prinipales'])
+def update_pilar(pilar: Pilar,db: Session = Depends(get_db)):
+    return update_pilar(db,pilar)
