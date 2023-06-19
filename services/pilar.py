@@ -35,3 +35,9 @@ def update_pilares(db: Session, pilar: PilarModel):
     db.refresh(find_pilar)
     return find_pilar
     
+def delete_pilares(db: Session, id: int):
+    find_pilar = db.query(PilarSchema).filter(PilarSchema.id == id).first()
+    db.delete(find_pilar)
+    db.commit()
+    return find_pilar
+    

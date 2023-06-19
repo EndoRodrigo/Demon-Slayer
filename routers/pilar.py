@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from db.database import SessionLocal, engine, Base
 from models.pilar import Pilar
-from services.pilar import get_pilares, create_pilares, update_pilares
+from services.pilar import get_pilares, create_pilares, update_pilares, delete_pilares
 
 Base.metadata.create_all(bind=engine)
 
@@ -30,3 +30,7 @@ def create_pilar(pilar: Pilar, db: Session = Depends(get_db)) -> dict():
 @pilar_router.put("/updatepilar", tags=['Pilares principales'])
 def update_pilar(pilar: Pilar,db: Session = Depends(get_db)):
     return update_pilares(db,pilar)
+
+@pilar_router.delete("/deletepilar", tags=['Pilares principales'])
+def update_pilar(id: int,db: Session = Depends(get_db)):
+    return delete_pilares(db,id)
